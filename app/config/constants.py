@@ -10,6 +10,11 @@ OUTPUT_DIR = "data/outputs"
 LOG_FILE = "logs/data_transform.log"
 CLEANED_DIR="data/outputs/cleaned_outputs"
 
+
+
+# mongo db constants
+
+
 MONGO_URI = os.getenv("MONGO_URI")
 DB_NAME = os.getenv("DB_NAME")
 COLLECTION_NAME = os.getenv("COLLECTION_NAME")
