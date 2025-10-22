@@ -2,7 +2,7 @@ import yaml
 from langchain_ollama import ChatOllama
 from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
-from config.constants import PROMPT_PATH, MODEL_NAME
+from app.config.constants import PROMPT_PATH, MODEL_NAME
 
 def load_llm_chain():
     """Load LLM and prompt from YAML."""

@@ -2,6 +2,11 @@ import json
 import os
 from typing import List, Dict, Any, Tuple
 
+from app.config.constants import CLEANED_DIR, OUTPUT_DIR
+
+
+
+# anomaly detection and data cleaning for inverter JSON records
 
 class InverterDataProcessor:
     def __init__(self, anomaly_log_path="anomalies_log.txt"):
@@ -157,8 +162,8 @@ def process_bulk_json_folder(input_folder: str, output_folder: str):
 
 
 # ---------- Usage ----------
-input_folder = r"D:\data_analysis\canonical_outputs\new"
-output_folder = "D:/data_analysis/cleaned_outputs"
+input_folder = OUTPUT_DIR
+output_folder = CLEANED_DIR
 
 process_bulk_json_folder(input_folder, output_folder)
  

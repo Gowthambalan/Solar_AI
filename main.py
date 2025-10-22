@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from app.routes.transform_route import router as transform_router
 import logging
-from config.constants import LOG_FILE
+from app.config.constants import LOG_FILE
 
 logging.basicConfig(
     filename=LOG_FILE,
@@ -15,6 +15,6 @@ app.include_router(transform_router, prefix="/api")
 
 @app.get("/")
 def home():
-    return {"message": "Welcome to Data Transformation API"}
+    return {"message": "Welcome to Data Transformation Api"}
 
 

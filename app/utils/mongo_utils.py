@@ -1,20 +1,33 @@
 import json
 import os
 from pymongo import MongoClient, ASCENDING, errors
+from app.config.constants import CLEANED_DIR, MONGO_URI,DB_NAME,COLLECTION_NAME
+
 
 # ----------------- MongoDB Connection -----------------
-MONGO_URI = "mongodb://localhost:27017"
-DB_NAME = "solar_db"
-COLLECTION_NAME = "inverter_readings"
 
-client = MongoClient(MONGO_URI)
-db = client[DB_NAME]
-collection = db[COLLECTION_NAME]
+client = None
+db = None
+collection = None
 
-# Ensure unique index on readingId + timestamp
-collection.create_index([("readingId", ASCENDING), ("timestamp", ASCENDING)], unique=True)
+def initialize_mongo_connection():
+    """Initialize MongoDB connection and create indexes."""
+    global client, db, collection
+    if collection is not None:
+        return collection
+    
+    client = MongoClient(MONGO_URI)
+    db = client[DB_NAME]
+    collection = db[COLLECTION_NAME]
+    
+    # Ensure unique index on readingId + timestamp
+    collection.create_index([("readingId", ASCENDING), ("timestamp", ASCENDING)], unique=True)
+    return collection
 
-# ----------------- Extract helper -----------------
+# mongo db insertion utility functions
+
+
+
 def extract_value(record, path):
     """Safely extract nested value from properties"""
     node = record.get("properties", {})
@@ -63,7 +76,7 @@ def insert_json_to_mongo(json_data):
         except errors.DuplicateKeyError:
             print(f"Duplicate skipped: readingId={reading_id}, timestamp={timestamp}")
         except Exception as e:
-            print(f" Error inserting record: {e}")
+            print(f"Error inserting record: {e}")
 
     return inserted_count
 
@@ -94,6 +107,6 @@ def insert_bulk_json_folder(folder_path):
     print(f" Total inserted records: {total_inserted}")
 
 # ----------------- Usage -----------------
-json_folder = "D:/data_analysis/cleaned_outputs"  # Replace with your cleaned JSON folder
+json_folder = CLEANED_DIR  # Replace with your cleaned JSON folder
 insert_bulk_json_folder(json_folder)
  

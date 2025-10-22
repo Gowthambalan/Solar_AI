@@ -2,10 +2,12 @@ import os
 import json
 import yaml
 import logging
-from config.constants import CANONICAL_PATH, OUTPUT_DIR
+from app.config.constants import CANONICAL_PATH, OUTPUT_DIR
 from app.llm.model_loader import load_llm_chain
 
 logger = logging.getLogger(__name__)
+
+# file processing service
 
 def process_files(files):
     """Process multiple uploaded JSON files."""
