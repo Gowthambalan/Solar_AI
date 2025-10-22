@@ -7,6 +7,8 @@ from app.llm.model_loader import load_llm_chain
 
 logger = logging.getLogger(__name__)
 
+# file processing service
+
 def process_files(files):
     """Process multiple uploaded JSON files."""
     os.makedirs(OUTPUT_DIR, exist_ok=True)

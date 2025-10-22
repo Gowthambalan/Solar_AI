@@ -5,6 +5,9 @@ from typing import List, Dict, Any, Tuple
 from app.config.constants import CLEANED_DIR, OUTPUT_DIR
 
 
+
+# anomaly detection and data cleaning for inverter JSON records
+
 class InverterDataProcessor:
     def __init__(self, anomaly_log_path="anomalies_log.txt"):
         self.prev_record: Dict[str, Any] = {}

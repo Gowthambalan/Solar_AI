@@ -15,6 +15,6 @@ app.include_router(transform_router, prefix="/api")
 
 @app.get("/")
 def home():
-    return {"message": "Welcome to Data Transformation API"}
+    return {"message": "Welcome to Data Transformation Api"}
 
 

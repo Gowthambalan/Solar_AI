@@ -15,7 +15,11 @@ collection = db[COLLECTION_NAME]
 # Ensure unique index on readingId + timestamp
 collection.create_index([("readingId", ASCENDING), ("timestamp", ASCENDING)], unique=True)
 
-# ----------------- Extract helper -----------------
+
+# mongo db insertion utility functions
+
+
+
 def extract_value(record, path):
     """Safely extract nested value from properties"""
     node = record.get("properties", {})
