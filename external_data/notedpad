@@ -1,0 +1,22 @@
+pip install uv
+
+
+uv --version
+
+uv init
+
+After this step, you’ll see a file:
+
+pyproject.toml
+
+uv add --requirements requirements.txt
+
+
+
+7. (Optional) Export requirements again
+
+If you need to generate a new requirements.txt later (for compatibility):
+
+uv export --format requirements-txt > requirements.txt
+
+uv export > requirements.txt  

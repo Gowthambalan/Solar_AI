@@ -1,0 +1,29 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Ignore specific folder
+powerthon/external_data/external_data/wetransfer_apdcl-net-metering-consumers-data-april-sep-25_2025-10-20_0312 (1)
+*.json
+
+# Ignore specific files
+*.xlsx
+*.csv
+*.zip
+*.log
+*uv.lock
+
+# Ignore all TOML files
+*.toml
+
+# Ignore environment files
+.env
+
+
