@@ -1,0 +1,193 @@
+{
+
+  "title": "SolarInverterTelemetry",
+  "schemaVersion": "2.0.0",
+  "type": "object",
+  "properties": {
+    "readingId": { "type": "string", "description": "Idempotent unique id" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "timezone": { "type": "string", "description": "IANA tz e.g. Asia/Kolkata" },
+    "source": {
+      "type": "object",
+      "properties": {
+        "vendor": { "type": "string" },
+        "deviceId": { "type": "string" },
+        "gatewayId": { "type": ["string","null"] },
+        "protocol": { "type": ["string","null"] }
+      }
+    },
+    "asset": {
+      "type": "object",
+      "properties": {
+        "siteId": { "type": "string" },
+        "plantId": { "type": "string" },
+        "officeId": { "type": ["string","null"] },
+        "inverterId": { "type": "string" },
+        "manufacturer": { "type": ["string","null"] },
+        "model": { "type": ["string","null"] },
+        "serialNumber": { "type": ["string","null"] },
+        "panelCount": { "type": ["integer","null"] },
+        "nameplate": {
+          "type": "object",
+          "properties": {
+            "dc_kWp": { "type": ["number","null"] },
+            "ac_kVA": { "type": ["number","null"] },
+            "dcAcRatio": { "type": ["number","null"] }
+          }
+        },
+        "phaseCount": { "type": "integer", "enum": [1,3] },
+        "location": {
+          "type": "object",
+          "properties": {
+            "lat": { "type": ["number","null"] },
+            "lon": { "type": ["number","null"] }
+          }
+        }
+      },
+      "required": ["inverterId","phaseCount"]
+    },
+    "power": {
+      "type": "object",
+      "properties": {
+        "acActive": { "type": "number" },
+        "acReactive": { "type": ["number","null"] },
+        "acApparent": { "type": ["number","null"] },
+        "powerFactor": { "type": ["number","null"] },
+        "dcPower": { "type": ["number","null"] },
+        "performanceRatio": { "type": ["number","null"] },
+        "specificYield_kWh_per_kWp": { "type": ["number","null"] },
+        "inverterEfficiency": { "type": ["number","null"] },
+        "clippingRatio": { "type": ["number","null"] }
+      },
+      "required": ["acActive"]
+    },
+    "energy": {
+      "type": "object",
+      "properties": {
+        "today": { "type": ["number","null"] },
+        "lifetime": { "type": ["number","null"] },
+        "monthly": { "type": ["number","null"] },
+        "yearly": { "type": ["number","null"] }
+      }
+    },
+    "electrical": {
+      "type": "object",
+      "properties": {
+        "acVoltage": { "type": "array", "items": { "type": "number" }, "minItems": 1, "maxItems": 3 },
+        "acCurrent": { "type": "array", "items": { "type": "number" }, "minItems": 1, "maxItems": 3 },
+        "frequency": { "type": ["number","null"] },
+        "mpptChannels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": ["integer","string","null"] },
+              "voltage": { "type": ["number","null"] },
+              "current": { "type": ["number","null"] },
+              "power": { "type": ["number","null"] }
+            }
+          }
+        },
+        "stringChannels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": ["integer","string","null"] },
+              "voltage": { "type": ["number","null"] },
+              "current": { "type": ["number","null"] },
+              "power": { "type": ["number","null"] }
+            }
+          }
+        }
+      }
+    },
+    "thermal": {
+      "type": "object",
+      "properties": {
+        "inverterTemp1": { "type": ["number","null"] },
+        "inverterTemp2": { "type": ["number","null"] },
+        "ambientTemp": { "type": ["number","null"] }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "properties": {
+        "todayHours": { "type": ["number","null"] },
+        "lifetimeHours": { "type": ["number","null"] },
+        "uptimeSec": { "type": ["integer","null"] }
+      }
+    },
+    "safety": {
+      "type": "object",
+      "properties": {
+        "insulationResistance": { "type": ["number","null"] },
+        "groundLeakageCurrent": { "type": ["number","null"] },
+        "residualCurrent": { "type": ["number","null"] }
+      }
+    },
+    "metering": {
+      "type": "object",
+      "properties": {
+        "mode": { "type": "string", "enum": ["net","gross","self-consume","unknown"] },
+        "exportLimitW": { "type": ["number","null"] },
+        "curtailmentW": { "type": ["number","null"] }
+      }
+    },
+    "status": {
+      "type": "object",
+      "properties": {
+        "state": { "type": "string", "enum": ["normal","warning","fault","offline"] },
+        "alarms": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "code": { "type": ["string","number"] },
+              "severity": { "type": "string", "enum": ["info","minor","major","critical"] },
+              "message": { "type": "string" }
+            }
+          }
+        },
+        "message": { "type": ["string","null"] }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "properties": {
+        "flag": { "type": "string", "enum": ["OK","EST","MISSING","DUP","OUTLIER"] },
+        "dataGapSec": { "type": ["integer","null"] },
+        "timeSyncStatus": { "type": "string", "enum": ["GPS","NTP","MANUAL","UNKNOWN"] }
+      }
+    },
+    "comms": {
+      "type": "object",
+      "properties": {
+        "rssi_dBm": { "type": ["number","null"] },
+        "latencyMs": { "type": ["number","null"] }
+      }
+    },
+    "firmware": {
+      "type": "object",
+      "properties": {
+        "fwVersion": { "type": ["string","null"] },
+        "hwRevision": { "type": ["string","null"] }
+      }
+    },
+    "battery": {
+      "type": "object",
+      "properties": {
+        "present": { "type": "boolean" },
+        "soc": { "type": ["number","null"] },
+        "soh": { "type": ["number","null"] },
+        "power": { "type": ["number","null"] },
+        "mode": { "type": ["string","null"], "enum": ["charge","discharge","idle",null] },
+        "cycles": { "type": ["integer","null"] }
+      }
+    },
+    "extensions": { "type": "object", "additionalProperties": true },
+    "ingestedAt": { "type": "string", "format": "date-time" },
+    "signature": { "type": ["string","null"] }
+  },
+  "required": ["readingId","timestamp","asset","power"]
+}

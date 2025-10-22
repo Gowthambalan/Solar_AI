@@ -1,0 +1,28 @@
+# canonical_prompt: |
+#   You are a data transformation assistant.
+
+#   Given the vendor inverter JSON below, map it to the following canonical schema fields:
+#   {schema}
+
+#   Input JSON:
+#   {input_json}
+
+#   Return ONLY a valid JSON object in canonical format.
+
+
+
+canonical_prompt: |
+  You are a data transformation assistant.
+
+  Given the vendor inverter JSON below, map it to the following canonical schema structure.
+  Maintain the exact schema structure with title, schemaVersion, type, properties, etc., 
+  but add a "value" field to each property with the corresponding value from the input JSON.
+
+  Canonical Schema:
+  {schema}
+
+  Input JSON:
+  {input_json}
+
+  Return ONLY a valid JSON object that follows the canonical schema structure exactly, 
+  with each property containing its schema definition AND a "value" field containing the actual data.
