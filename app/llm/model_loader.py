@@ -1,17 +1,18 @@
-import yaml
-from langchain_ollama import ChatOllama
-from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
+from langchain.prompts import PromptTemplate
+from langchain_ollama import ChatOllama
+import yaml
 from app.config.constants import PROMPT_PATH, MODEL_NAME
 
 def load_llm_chain():
-    """Load LLM and prompt from YAML."""
+    """Load LLM and prompt from YAML (updated for LangChain 1.x)."""
     with open(PROMPT_PATH, "r") as f:
         prompt_data = yaml.safe_load(f)
     prompt_text = prompt_data["canonical_prompt"]
 
     llm = ChatOllama(model=MODEL_NAME, temperature=0)
     prompt = PromptTemplate.from_template(prompt_text)
-    return prompt | llm | JsonOutputParser()
 
-
+    # Updated chain using pipe operator
+    chain = prompt | llm | JsonOutputParser()
+    return chain

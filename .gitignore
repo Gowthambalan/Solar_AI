@@ -133,3 +133,8 @@ __pycache__/
 wetransfer_*/
 engineered_dataset.xlsx
 statistical_analysis.ipynb
+
+#uv unwanted 
+
+*.uv.lock
+*.python-version
