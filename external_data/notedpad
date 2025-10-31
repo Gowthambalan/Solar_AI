@@ -20,3 +20,22 @@ If you need to generate a new requirements.txt later (for compatibility):
 uv export --format requirements-txt > requirements.txt
 
 uv export > requirements.txt  
+
+
+
+
+ missing values :[
+
+    
+ ]"dcAcRatio": { "type": ["number","null"], "value": null },
+"location": {
+  "type": "object",
+  "properties": {
+    "lat": { "type": ["number","null"], "value": null },
+    "lon": { "type": ["number","null"], "value": null }
+  }
+},
+"specificYield_kWh_per_kWp": { "type": ["number","null"], "value": null },
+"inverterEfficiency": { "type": ["number","null"], "value": null },
+"clippingRatio": { "type": ["number","null"], "value": null },
+"residualCurrent": { "type": ["number","null"], "value": null }
